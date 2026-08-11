@@ -36,7 +36,7 @@ Scent Parlor is a luxury perfume storefront, not a generic e-commerce template.
 
 | Token                | Value (light)             | Usage                                  |
 | -------------------- | ------------------------- | -------------------------------------- |
-| `background`         | `oklch(0.97 0.01 65)`     | Warm cream/beige canvas                |
+| `background`         | `neutral-100` / `#f5f5f5` | Neutral site canvas                    |
 | `foreground`         | `oklch(0.1 0.01 0)`       | Deep charcoal/black text               |
 | `card`               | `oklch(0.99 0.002 75)`    | Product card surface (near-white)      |
 | `primary`            | `oklch(0.72 0.14 55)`     | Rose-gold/copper CTAs & accents        |
@@ -70,17 +70,11 @@ Guidelines:
 
 ---
 
-## Core Utilities
+## Styling Rules
 
-Defined in `app/globals.css`:
+Keep `app/globals.css` limited to theme tokens, resets, shared utilities, and reusable animation primitives. Component-specific layout, spacing, typography, and color use Tailwind classes in component markup.
 
-- `.scent-panel`: refined card surface with subtle warm tone, generous padding, used for hero sections and feature rows.
-- `.fragrance-card`: minimal product card — centered image, name, price below, "SHOP NOW" link in rose-gold.
-- `.luxury-cta`: primary button — pill shape, rose-gold fill, dark text, minimal hover state (subtle lift).
-- `.eyebrow-label`: uppercase, tracked, muted color, small size for section labels.
-- `.feature-strip`: horizontal row of 4 feature icons + text, used for "Why Choose Scent Parlor" section.
-- `.story-panel`: left-aligned image + right-aligned text, full-width, used for "Our Story" section.
-- `.newsletter-banner`: dark burgundy banner with centered form, used for email signup section.
+Only classes reused across components belong in `app/globals.css`. Do not create global classes for one-off section styling. The hero's warm peach palette is intentionally local to the hero and must not become the site-wide background.
 
 ---
 
@@ -115,11 +109,13 @@ Sections to build (from NEXAWEB reference, adapted):
 
 1. **Hero banner** (eyebrow label, large headline, body copy, CTA button, hero perfume bottle image on right)
    - Can use static image or light carousel (optional)
-2. **Our Collection** (section eyebrow, title, subtitle, product grid 5 columns with name/price/"SHOP NOW")
-3. **Our Story** (section eyebrow, title, body copy on right, lifestyle image on left)
-4. **Why Choose Scent Parlor** (4-column feature row: icons + title + description)
-5. **Newsletter signup** (dark burgundy banner, centered, email input + subscribe button)
-6. **Footer** (multi-column: Quick Links, Customer Care, Help, Contact Us + social icons)
+   - Warm peach/rose-beige colors are scoped to this section only; surrounding sections return to `neutral-100`.
+2. **Perfume house logo loop** (monochrome fragrance-house wordmarks on `neutral-100`, directly below the hero)
+3. **Our Collection** (section eyebrow, title, subtitle, product grid 5 columns with name/price/"SHOP NOW")
+4. **Our Story** (section eyebrow, title, body copy on right, lifestyle image on left)
+5. **Why Choose Scent Parlor** (4-column feature row: icons + title + description)
+6. **Newsletter signup** (dark burgundy banner, centered, email input + subscribe button)
+7. **Footer** (multi-column: Quick Links, Customer Care, Help, Contact Us + social icons)
 
 Explicitly **excluded from v1**: cart flow (icon only, no functionality yet).
 
