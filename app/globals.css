@@ -13,6 +13,7 @@
   --muted-foreground: oklch(0.5 0.03 35);
   --border: oklch(0.3 0.01 0 / 10%);
   --ring: oklch(0.72 0.14 55);
+  --footer-bg: oklch(0.25 0.04 30);
 }
 
 @theme inline {
@@ -31,6 +32,7 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
   --color-ring: var(--ring);
+  --color-footer-bg: var(--footer-bg);
 }
 
 * {

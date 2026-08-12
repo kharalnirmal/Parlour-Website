@@ -41,6 +41,7 @@ const features: Feature[] = [
 export default function WhyChooseUs() {
   return (
     <section
+      id="ingredients"
       aria-labelledby="why-choose-us-heading"
       className="bg-background py-14 sm:py-16 lg:py-20"
     >
