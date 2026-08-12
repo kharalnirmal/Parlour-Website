@@ -76,12 +76,15 @@ export default function PerfumeCollection() {
         <div className="mx-auto mb-12 sm:mb-16 max-w-2xl text-center">
           <p className="mb-1 font-medium text-md text-secondary uppercase tracking-[0.24em]">
             OUR COLLECTION
-            <div className="flex justify-center items-center gap-2 mt-3">
-              <div className="bg-gradient-to-r from-transparent to-primary rounded-full w-12 h-1"></div>
-              <span className="text-primary text-xs">✦</span>
-              <div className="bg-gradient-to-l from-transparent to-primary rounded-full w-12 h-1"></div>
-            </div>
           </p>
+          <div
+            className="flex justify-center items-center gap-2 mt-3"
+            aria-hidden="true"
+          >
+            <div className="bg-gradient-to-r from-transparent to-primary rounded-full w-12 h-1" />
+            <span className="text-primary text-xs">✦</span>
+            <div className="bg-gradient-to-l from-transparent to-primary rounded-full w-12 h-1" />
+          </div>
 
           <h2 className="font-display font-semibold text-foreground text-4xl md:text-5xl leading-tight">
             Find Your Signature Scent
@@ -92,21 +95,23 @@ export default function PerfumeCollection() {
         </div>
 
         <CollectionProductGrid>
-          {products.map((product) => (
+          {products.map((product, index) => (
             <Card
-              key={product.name}
+              key={`${product.name}-${index}`}
               data-collection-card
-              className="gap-0 bg-card shadow-none py-0 border border-border rounded-sm ring-0 min-w-0"
+              className="w-full max-w-[21rem] md:max-w-none min-w-0 justify-self-center gap-0 rounded-md border border-border bg-card py-0 shadow-none ring-0 hover:border-primary/25 hover:bg-card/95 motion-safe:transition-[transform,box-shadow,border-color,background-color] motion-safe:duration-500 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-sm motion-reduce:transform-none"
             >
               <CardContent className="flex flex-col px-5 sm:px-6 pt-6 pb-5 h-full">
-                <div className="relative mb-7 w-full aspect-[4/5] overflow-hidden">
-                  <Image
-                    src={product.image}
-                    alt={`${product.name} perfume bottle`}
-                    fill
-                    sizes="(min-width: 1280px) 18vw, (min-width: 768px) 30vw, 90vw"
-                    className="object-contain motion-reduce:transform-none group-hover/card:scale-[1.025] motion-safe:transition-transform motion-safe:duration-500"
-                  />
+                <div className="mb-7 w-full aspect-[4/5] overflow-hidden rounded-md bg-muted/50 p-3 ring-1 ring-foreground/5 sm:p-4">
+                  <div className="relative h-full w-full">
+                    <Image
+                      src={product.image}
+                      alt={`${product.name} perfume bottle`}
+                      fill
+                      sizes="(min-width: 1280px) 18vw, (min-width: 768px) 30vw, 45vw"
+                      className="object-contain motion-reduce:transform-none group-hover/card:scale-[1.025] motion-safe:transition-transform motion-safe:duration-500"
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-auto text-center">

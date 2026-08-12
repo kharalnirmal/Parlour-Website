@@ -4,6 +4,7 @@ import LogoLoop, { type LogoLoopItem } from "@/app/components/LogoLoop";
 import Navbar from "@/app/components/Navbar";
 import OurStory from "@/app/components/OurStory";
 import PerfumeCollection from "@/app/components/PerfumeCollection";
+import WhyChooseUs from "@/app/components/WhyChooseUs";
 
 const perfumeBrands: LogoLoopItem[] = [
   {
@@ -57,6 +58,7 @@ export default function Home() {
       </section>
       <PerfumeCollection />
       <OurStory />
+      <WhyChooseUs />
       <LeftScrollProgress />
     </main>
   );

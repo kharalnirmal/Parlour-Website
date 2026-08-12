@@ -12,7 +12,7 @@ export default function OurStory() {
       className="bg-background w-full"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 mx-auto w-full">
-        <div className="relative min-h-0 md:min-h-[480px] aspect-[16/10] md:aspect-auto overflow-hidden">
+        <div className="relative hidden min-h-0 overflow-hidden md:block md:min-h-[480px] md:aspect-auto">
           <Image
             src="/story/story.jpg"
             alt="Perfume bottles and fragrant botanicals arranged in the Scent Parlour"
