@@ -31,18 +31,18 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Primary navigation"
-      className="sticky top-0 z-50 bg-neutral-100"
+      className="top-0 z-50 sticky bg-neutral-100"
     >
-      <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="flex min-h-16 items-center justify-between lg:grid lg:min-h-20 lg:grid-cols-[auto_1fr] lg:gap-8">
+      <div className="mx-auto px-5 sm:px-8 lg:px-6 max-w-[1440px]">
+        <div className="flex justify-between items-center lg:gap-8 lg:grid lg:grid-cols-[auto_2fr] min-h-16 lg:min-h-20">
           <Link
             href="/"
-            className="justify-self-start whitespace-nowrap font-serif text-[clamp(1.15rem,1.7vw,1.35rem)] font-semibold tracking-[0.12em] text-neutral-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#a97968]"
+            className="2xl:-ml-18 focus-visible:outline-[#a97968] focus-visible:outline-2 focus-visible:outline-offset-4 font-serif font-semibold text-[clamp(1.15rem,1.7vw,1.35rem)] text-neutral-950 tracking-[0.12em] whitespace-nowrap"
           >
             SCENT PARLOUR
           </Link>
 
-          <div className="hidden items-center lg:flex lg:justify-self-end lg:gap-8 xl:gap-10">
+          <div className="hidden lg:flex lg:justify-self-end items-center lg:gap-8 xl:gap-10">
             {navigation.map((item, index) => (
               <Link
                 key={item.label}
@@ -63,11 +63,17 @@ export default function Navbar() {
             type="button"
             aria-expanded={isOpen}
             aria-controls="mobile-navigation"
-            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-label={
+              isOpen ? "Close navigation menu" : "Open navigation menu"
+            }
             onClick={() => setIsOpen((open) => !open)}
-            className="inline-flex size-11 items-center justify-center text-neutral-900 transition-colors duration-300 hover:text-[#966958] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#a97968] motion-reduce:transition-none lg:hidden"
+            className="lg:hidden inline-flex justify-center items-center focus-visible:outline-[#a97968] focus-visible:outline-2 focus-visible:outline-offset-2 size-11 text-neutral-900 hover:text-[#966958] transition-colors motion-reduce:transition-none duration-300"
           >
-            {isOpen ? <X aria-hidden="true" size={22} /> : <Menu aria-hidden="true" size={22} />}
+            {isOpen ? (
+              <X aria-hidden="true" size={22} />
+            ) : (
+              <Menu aria-hidden="true" size={22} />
+            )}
           </button>
         </div>
 
@@ -81,7 +87,7 @@ export default function Navbar() {
           }`}
         >
           <div className="overflow-hidden">
-            <div className="flex flex-col items-start gap-2 border-t border-neutral-300 py-5">
+            <div className="flex flex-col items-start gap-2 py-5 border-neutral-300 border-t">
               {navigation.map((item, index) => (
                 <Link
                   key={item.label}

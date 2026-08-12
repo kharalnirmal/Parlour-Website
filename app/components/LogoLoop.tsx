@@ -12,6 +12,7 @@ import {
 } from "react";
 
 import "./LogoLoop.css";
+import { cn } from "@/lib/utils";
 
 const ANIMATION_CONFIG = { smoothTau: 0.25, minCopies: 2, copyHeadroom: 2 };
 
@@ -123,7 +124,9 @@ export const LogoLoop = memo(function LogoLoop({
 
     const sequenceRect = sequence.getBoundingClientRect();
     const measuredSize = isVertical ? sequenceRect.height : sequenceRect.width;
-    const viewportSize = isVertical ? container.clientHeight : container.clientWidth;
+    const viewportSize = isVertical
+      ? container.clientHeight
+      : container.clientWidth;
     if (measuredSize <= 0) return;
 
     const roundedSize = Math.ceil(measuredSize);
@@ -131,7 +134,8 @@ export const LogoLoop = memo(function LogoLoop({
       currentSize === roundedSize ? currentSize : roundedSize,
     );
 
-    const copiesNeeded = Math.ceil(viewportSize / measuredSize) + ANIMATION_CONFIG.copyHeadroom;
+    const copiesNeeded =
+      Math.ceil(viewportSize / measuredSize) + ANIMATION_CONFIG.copyHeadroom;
     const nextCopyCount = Math.max(ANIMATION_CONFIG.minCopies, copiesNeeded);
     setCopyCount((currentCount) =>
       currentCount === nextCopyCount ? currentCount : nextCopyCount,
@@ -165,7 +169,8 @@ export const LogoLoop = memo(function LogoLoop({
   }, [copyCount, logos, updateDimensions]);
 
   useEffect(() => {
-    const images = sequenceRef.current?.querySelectorAll<HTMLImageElement>("img");
+    const images =
+      sequenceRef.current?.querySelectorAll<HTMLImageElement>("img");
     if (!images?.length) {
       updateDimensions();
       return;
@@ -202,22 +207,30 @@ export const LogoLoop = memo(function LogoLoop({
     }
 
     if (sequenceSize > 0) {
-      offsetRef.current = ((offsetRef.current % sequenceSize) + sequenceSize) % sequenceSize;
+      offsetRef.current =
+        ((offsetRef.current % sequenceSize) + sequenceSize) % sequenceSize;
       track.style.transform = isVertical
         ? `translate3d(0, ${-offsetRef.current}px, 0)`
         : `translate3d(${-offsetRef.current}px, 0, 0)`;
     }
 
     const animate = (timestamp: number) => {
-      if (lastTimestampRef.current === null) lastTimestampRef.current = timestamp;
-      const deltaTime = Math.max(0, timestamp - lastTimestampRef.current) / 1000;
+      if (lastTimestampRef.current === null)
+        lastTimestampRef.current = timestamp;
+      const deltaTime =
+        Math.max(0, timestamp - lastTimestampRef.current) / 1000;
       lastTimestampRef.current = timestamp;
-      const target = isHovered && effectiveHoverSpeed !== undefined ? effectiveHoverSpeed : targetVelocity;
-      const easingFactor = 1 - Math.exp(-deltaTime / ANIMATION_CONFIG.smoothTau);
+      const target =
+        isHovered && effectiveHoverSpeed !== undefined
+          ? effectiveHoverSpeed
+          : targetVelocity;
+      const easingFactor =
+        1 - Math.exp(-deltaTime / ANIMATION_CONFIG.smoothTau);
       velocityRef.current += (target - velocityRef.current) * easingFactor;
 
       if (sequenceSize > 0) {
-        offsetRef.current = (offsetRef.current + velocityRef.current * deltaTime) % sequenceSize;
+        offsetRef.current =
+          (offsetRef.current + velocityRef.current * deltaTime) % sequenceSize;
         if (offsetRef.current < 0) offsetRef.current += sequenceSize;
         track.style.transform = isVertical
           ? `translate3d(0, ${-offsetRef.current}px, 0)`
@@ -229,11 +242,19 @@ export const LogoLoop = memo(function LogoLoop({
 
     animationFrameRef.current = requestAnimationFrame(animate);
     return () => {
-      if (animationFrameRef.current !== null) cancelAnimationFrame(animationFrameRef.current);
+      if (animationFrameRef.current !== null)
+        cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
       lastTimestampRef.current = null;
     };
-  }, [effectiveHoverSpeed, isHovered, isVertical, prefersReducedMotion, sequenceSize, targetVelocity]);
+  }, [
+    effectiveHoverSpeed,
+    isHovered,
+    isVertical,
+    prefersReducedMotion,
+    sequenceSize,
+    targetVelocity,
+  ]);
 
   const containerStyle = useMemo<LogoLoopStyle>(
     () => ({
@@ -279,8 +300,8 @@ export const LogoLoop = memo(function LogoLoop({
         />
       );
       const itemLabel = isNodeItem(item)
-        ? item.ariaLabel ?? item.title
-        : item.alt ?? item.title;
+        ? (item.ariaLabel ?? item.title)
+        : (item.alt ?? item.title);
       const itemContent = item.href ? (
         <a
           className="logoloop__link"
@@ -296,18 +317,32 @@ export const LogoLoop = memo(function LogoLoop({
         content
       );
 
-      return <li className="logoloop__item" key={index}>{itemContent}</li>;
+      return (
+        <li className="logoloop__item" key={index}>
+          {itemContent}
+        </li>
+      );
     },
     [renderItem],
   );
 
   return (
-    <div ref={containerRef} className={rootClassName} style={containerStyle} role="region" aria-label={ariaLabel}>
+    <div
+      ref={containerRef}
+      className={cn(rootClassName, "mt-5")}
+      style={containerStyle}
+      role="region"
+      aria-label={ariaLabel}
+    >
       <div
         ref={trackRef}
         className="logoloop__track"
-        onMouseEnter={() => effectiveHoverSpeed !== undefined && setIsHovered(true)}
-        onMouseLeave={() => effectiveHoverSpeed !== undefined && setIsHovered(false)}
+        onMouseEnter={() =>
+          effectiveHoverSpeed !== undefined && setIsHovered(true)
+        }
+        onMouseLeave={() =>
+          effectiveHoverSpeed !== undefined && setIsHovered(false)
+        }
       >
         {Array.from({ length: copyCount }, (_, copyIndex) => {
           const isDuplicate = copyIndex > 0;
@@ -319,7 +354,9 @@ export const LogoLoop = memo(function LogoLoop({
               aria-hidden={isDuplicate || undefined}
               inert={isDuplicate || undefined}
             >
-              {logos.map((item, itemIndex) => renderLogoItem(item, itemIndex, isDuplicate))}
+              {logos.map((item, itemIndex) =>
+                renderLogoItem(item, itemIndex, isDuplicate),
+              )}
             </ul>
           );
         })}

@@ -2,6 +2,8 @@ import HeroSection from "@/app/components/HeroSection";
 import LeftScrollProgress from "@/app/components/LeftScrollProgress";
 import LogoLoop, { type LogoLoopItem } from "@/app/components/LogoLoop";
 import Navbar from "@/app/components/Navbar";
+import OurStory from "@/app/components/OurStory";
+import PerfumeCollection from "@/app/components/PerfumeCollection";
 
 const perfumeBrands: LogoLoopItem[] = [
   {
@@ -53,6 +55,8 @@ export default function Home() {
           className="text-[#3b302c]"
         />
       </section>
+      <PerfumeCollection />
+      <OurStory />
       <LeftScrollProgress />
     </main>
   );

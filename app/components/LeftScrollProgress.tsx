@@ -36,10 +36,10 @@ export default function LeftScrollProgress() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-y-0 left-0 z-50 hidden w-[2px] bg-[#3a211a]/10 sm:block"
+      className="hidden sm:block left-0 z-50 fixed inset-y-0 bg-[#3a211a]/10 w-[2px] pointer-events-none"
       aria-hidden="true"
     >
-      <div ref={thumbRef} className="h-full w-full bg-[#9a6656]/70" />
+      <div ref={thumbRef} className="bg-[#9a6656]/70 w-full h-full" />
     </div>
   );
 }
